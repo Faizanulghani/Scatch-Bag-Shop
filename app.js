@@ -1,15 +1,21 @@
 let express = require("express");
 let app = express();
-let cookieParser = require("cookie-parser")
-let path = require("path")
+let cookieParser = require("cookie-parser");
+let path = require("path");
+let userRouter = require("./routes/userRouter");
+let ownerRouter = require("./routes/ownerRouter");
+let productRouter = require("./routes/productRouter");
 
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(cookieParser())
-app.use(express.static(path.join(__dirname,"public")))
-app.set('view engine','ejs')
-app.get("/", (req, res) => {
-  res.send("Work");
-});
+let db = require("./config/mongoose-connection");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+app.set("view engine", "ejs");
+
+app.use("/owners", ownerRouter);
+app.use("/users", userRouter);
+app.use("/products", productRouter);
 
 app.listen(3000);
