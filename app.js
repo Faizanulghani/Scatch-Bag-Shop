@@ -5,6 +5,7 @@ let path = require("path");
 let userRouter = require("./routes/userRouter");
 let ownerRouter = require("./routes/ownerRouter");
 let productRouter = require("./routes/productRouter");
+let indexRouter = require("./routes/index");
 
 let db = require("./config/mongoose-connection");
 
@@ -17,5 +18,6 @@ app.set("view engine", "ejs");
 app.use("/owners", ownerRouter);
 app.use("/users", userRouter);
 app.use("/products", productRouter);
+app.use("/", indexRouter);
 
 app.listen(3000);
