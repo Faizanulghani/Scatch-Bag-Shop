@@ -30,7 +30,6 @@ app.set("view engine", "ejs");
 app.use("/owners", ownerRouter);
 app.use("/users", userRouter);
 app.use("/products", productRouter);
-app.use("/products", productRouter);
 app.use("/", indexRouter);
 
 app.listen(3000);
