@@ -20,10 +20,21 @@ if (process.env.NODE_ENV == "development") {
   });
 }
 
-
 router.get("/admin", (req, res) => {
-  let success = req.flash("success")
-  res.render("createproducts",{success});
+  res.render("owner-login");
+});
+
+router.post("/admin/login", async (req, res) => {
+  let owner = await ownerModel.findOne({ email: req.body.email });
+  console.log(owner);
+  
+  if (!owner) {
+    return res.redirect("/");
+  }
+  if (owner.password == req.body.password) {
+    let success = req.flash("success");
+    res.render("createproducts", { success });
+  }
 });
 
 module.exports = router;
